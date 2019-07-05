@@ -1,1 +1,21 @@
-<p>forms-list works!</p>
+<button class="btn btn-primary btn-addForm" (click)="addNewForm()">Add new form</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Form Id</th>
+      <th scope="col">Form Name</th>
+      <th scope="col">Submissions</th>
+      <th scope="col">Submit Page</th>
+      <th scope="col">Submissions Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let form of forms; let i=index">
+      <th scope="row">{{form.id}}</th>
+      <td>{{ form.name }}</td>
+      <td>{{ form.submissions }}</td>
+      <td><a [routerLink]="[ '/submit', form.id ]">View</a></td>
+      <td><a [routerLink]="[ '/submissions', form.id ]">View</a></td>
+    </tr>
+  </tbody>
+</table>

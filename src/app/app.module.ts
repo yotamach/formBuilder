@@ -7,6 +7,8 @@ import { FormsListComponent } from './forms-list/forms-list.component';
 import { FormBuilderComponent } from './form-builder/form-builder.component';
 import { FormSubmitComponent } from './form-submit/form-submit.component';
 import { FormSubmissionsComponent } from './form-submissions/form-submissions.component';
+import { HttpClientModule } from "@angular/common/http";
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,10 @@ import { FormSubmissionsComponent } from './form-submissions/form-submissions.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FormService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
