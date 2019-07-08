@@ -14,12 +14,19 @@ export class FormsListComponent implements OnInit {
   forms: Form[] = [{
     id: '1',
     name: 'Carrer form',
-    submissions: '43'
-  },
-  {
-    id: '2',
-    name: '',
-    submissions: ''
+    submissions: '43',
+    fields: [{
+      id: '1',
+      name: 'name',
+      label: 'Enter your name:',
+      type: 'text'
+    },
+    {
+      id: '2',
+      name: 'phone',
+      label: 'Enter your phone:',
+      type: 'tel'
+    }]
   }];
 
   ngOnInit() {

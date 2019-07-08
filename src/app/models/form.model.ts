@@ -1,5 +1,8 @@
+import { Field } from './field.model';
+
 export interface Form {
-  id: string;
+  id?: string;
   name: string;
   submissions: string;
+  fields: Field[];
 }
