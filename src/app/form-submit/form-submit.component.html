@@ -1,1 +1,16 @@
-<h2></h2>
+<form [formGroup]="customForm" (ngSubmit)="submitForm()">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">{{ currentForm.name }}</h4>
+    </div>
+    <div class="card-body">
+      <div class="form-group" *ngFor="let field of currentForm.fields">
+        <label for="{{ field.name }}">{{ field.label }}</label>
+        <input type="{{ field.type }}" class="form-control" formControlName="{{ field.name }}" id="{{ field.name }}"
+          placeholder="Please insert {{ field.name }}:">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-info" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</form>

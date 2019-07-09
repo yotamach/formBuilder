@@ -1,14 +1,15 @@
 <h3>Form builder</h3>
-<form [formGroup]="biuldForm">
+<form [formGroup]="buildForm" (ngSubmit)="createForm()">
   <div class="form-group">
     <label for="formName">Form name</label>
-    <input type="email" class="form-control" formControlName="formName" id="formName" placeholder="Please insert form name:">
+    <input type="text" class="form-control" formControlName="formName" id="formName" placeholder="Please insert form name:">
   </div>
   <div class="card">
     <div class="card-header">
       <h4>Fields list</h4>
     </div>
     <div class="card-body">
+      <h5 *ngIf="fields.length < 1">There are no fields yet</h5>
       <div *ngFor="let field of fields" class="form-group">
         <label for="{{ field.name }}">{{ field.label }}</label>
         <input type="{{ field.type }}" class="form-control" id="{{ field.name }}"
@@ -16,12 +17,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="displayAddField" class="card">
-      <div class="card-header">
+  <div class="card">
+      <div *ngIf="displayAddField" class="card-body">        
         <h4>Adding fields</h4>
-      </div>
-      <div class="card-body">
-        <div *ngIf="displayAddField" class="form-row align-items-center">
+        <div class="form-row align-items-center">
           <div class="col">
             <input type="text" class="form-control" #fieldLabel id="fieldLabel" placeholder="Please enter field label:">
           </div>
@@ -38,13 +37,11 @@
             <button class="btn btn-success" (click)="addField()" >Add new field</button>
           </div>
         </div>
-        <button *ngIf="!displayAddField" type="button" class="btn btn-success btn-add-field"><strong>+</strong></button>
+      </div>
+      <div *ngIf="!displayAddField" class="card-body">
+          <button type="button" class="btn btn-success btn-addField" (click)="showFieldForm()"><strong>+</strong></button>
       </div>
   </div>
-  <div class="row">
-      <button *ngIf="!displayAddField" type="button" class="btn btn-info btn-addField" (click)="showFieldForm()"><strong>+</strong></button>
-  </div>
-  <div class="row">
-      <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-info" (click)="goBack()">Back</button>
 </form>

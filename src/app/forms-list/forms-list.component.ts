@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '../models/form.model';
 import { Router } from '@angular/router';
+import { FormService } from '../services/form.service';
 
 @Component({
   selector: 'app-forms-list',
@@ -9,27 +10,12 @@ import { Router } from '@angular/router';
 })
 export class FormsListComponent implements OnInit {
 
-  constructor(private router: Router) {  }
+  constructor(private router: Router,private formService: FormService) {  }
 
-  forms: Form[] = [{
-    id: '1',
-    name: 'Carrer form',
-    submissions: '43',
-    fields: [{
-      id: '1',
-      name: 'name',
-      label: 'Enter your name:',
-      type: 'text'
-    },
-    {
-      id: '2',
-      name: 'phone',
-      label: 'Enter your phone:',
-      type: 'tel'
-    }]
-  }];
+  forms: Form[] = [];
 
   ngOnInit() {
+    this.forms = this.formService.getForms();
   }
 
   addNewForm(){

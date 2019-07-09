@@ -4,5 +4,5 @@ export interface Form {
   id?: string;
   name: string;
   submissions: string;
-  fields: Field[];
+  fields?: Field[];
 }

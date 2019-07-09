@@ -1,6 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Field } from '../models/field.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Location } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormService } from '../services/form.service';
+import { Form } from '../models/form.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-builder',
@@ -9,21 +13,22 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class FormBuilderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private FormService: FormService, private location: Location ,private formBuilder: FormBuilder) { }
   @ViewChild('fieldLabel',{static: false}) fieldLabel: ElementRef;
   @ViewChild('fieldName',{static: false}) fieldName: ElementRef;
   @ViewChild('fieldType',{static: false}) fieldType: ElementRef;
 
   fields: Field[] = [];
+  createdForm: Form;
   displayAddField = true;
-  biuldForm: FormGroup;
+  buildForm: FormGroup;
   types = ['color','date','datetime-local','email','file',
             'hidden','image','month','number','password',
             'range','search','tel','text','time','week'];
             
   ngOnInit() {
-    this.biuldForm = new FormGroup({
-      formName: new FormControl()
+    this.buildForm = this.formBuilder.group({
+      formName: ['', Validators.required]
    });
   }
 
@@ -42,6 +47,27 @@ export class FormBuilderComponent implements OnInit {
 
   showFieldForm(){
     this.displayAddField = !this.displayAddField;
+  }
+
+  goBack(){
+    this.location.back();
+  }
+
+  createForm(){
+    if(this.buildForm.invalid){
+      return;
+    }
+    if(this.fields.length === 0){
+      return;
+    }
+    this.createdForm = {
+      id: '11',
+      name: this.buildForm.value.formName,
+      submissions: '0',
+      fields: [...this.fields]
+    }
+    this.FormService.createForm(this.createdForm);
+    this.router.navigate(["/"]);
   }
 
 }
