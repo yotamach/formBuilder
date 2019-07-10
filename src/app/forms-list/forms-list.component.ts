@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form } from '../models/form.model';
 import { Router } from '@angular/router';
 import { FormService } from '../services/form.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-forms-list',
@@ -11,11 +12,15 @@ import { FormService } from '../services/form.service';
 export class FormsListComponent implements OnInit {
 
   constructor(private router: Router,private formService: FormService) {  }
-
+  private formsSub: Subscription;
   forms: Form[] = [];
 
   ngOnInit() {
-    this.forms = this.formService.getForms();
+    this.formService.getForms();
+    this.formsSub = this.formService.getFormUpdateListener()
+    .subscribe((forms) => {
+      this.forms = forms;
+    });
   }
 
   addNewForm(){

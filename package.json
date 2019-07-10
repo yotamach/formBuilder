@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:server": "node ./backend/index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,7 +23,8 @@
     "bootstrap": "^4.3.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "express": "^4.16.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
@@ -43,6 +45,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "typescript": "~3.4.3",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4"
   }
 }

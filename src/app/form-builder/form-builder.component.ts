@@ -61,9 +61,8 @@ export class FormBuilderComponent implements OnInit {
       return;
     }
     this.createdForm = {
-      id: '11',
       name: this.buildForm.value.formName,
-      submissions: '0',
+      submissions: [],
       fields: [...this.fields]
     }
     this.FormService.createForm(this.createdForm);
